@@ -6,7 +6,7 @@ import { describe, it } from 'mocha';
 
 import { load } from '@/utils/yaml';
 
-const DEFAULT_ORIGIN = 'https://sub-store.vercel.app';
+const DEFAULT_ORIGIN = 'https://sub-store-frontend.666986.xyz';
 
 describe('module CORS allowlist config', function () {
     it('adds the default CORS argument to Surge modules', function () {

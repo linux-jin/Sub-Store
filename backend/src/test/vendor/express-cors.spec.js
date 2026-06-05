@@ -35,7 +35,7 @@ describe('express CORS allowlist adapter', function () {
 
     it('rejects disallowed actual requests before route handlers run', async function () {
         await withServer(
-            'https://sub-store.vercel.app',
+            'https://sub-store-frontend.666986.xyz',
             async ({ baseUrl, getRouteCalls }) => {
                 const res = await fetch(`${baseUrl}/probe`, {
                     headers: {
@@ -54,7 +54,7 @@ describe('express CORS allowlist adapter', function () {
 
     it('rejects disallowed preflight requests', async function () {
         await withServer(
-            'https://sub-store.vercel.app',
+            'https://sub-store-frontend.666986.xyz',
             async ({ baseUrl, getRouteCalls }) => {
                 const res = await fetch(`${baseUrl}/probe`, {
                     method: 'OPTIONS',
@@ -72,11 +72,11 @@ describe('express CORS allowlist adapter', function () {
 
     it('allows configured exact origins and returns readable CORS headers', async function () {
         await withServer(
-            'https://sub-store.vercel.app,http://127.0.0.1:8888',
+            'https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888',
             async ({ baseUrl, getRouteCalls }) => {
                 const official = await fetch(`${baseUrl}/probe`, {
                     headers: {
-                        Origin: 'https://sub-store.vercel.app',
+                        Origin: 'https://sub-store-frontend.666986.xyz',
                     },
                 });
                 const local = await fetch(`${baseUrl}/probe`, {
@@ -90,10 +90,10 @@ describe('express CORS allowlist adapter', function () {
                 expect(getRouteCalls()).to.equal(2);
                 expect(
                     official.headers.get('access-control-allow-origin'),
-                ).to.equal('https://sub-store.vercel.app');
-                expect(local.headers.get('access-control-allow-origin')).to.equal(
-                    'http://127.0.0.1:8888',
-                );
+                ).to.equal('https://sub-store-frontend.666986.xyz');
+                expect(
+                    local.headers.get('access-control-allow-origin'),
+                ).to.equal('http://127.0.0.1:8888');
                 expect(official.headers.get('vary')).to.include('Origin');
             },
         );
@@ -101,7 +101,7 @@ describe('express CORS allowlist adapter', function () {
 
     it('continues no-origin requests through the existing route flow', async function () {
         await withServer(
-            'https://sub-store.vercel.app',
+            'https://sub-store-frontend.666986.xyz',
             async ({ baseUrl, getRouteCalls }) => {
                 const res = await fetch(`${baseUrl}/probe`);
 
@@ -116,10 +116,10 @@ describe('express CORS allowlist adapter', function () {
 
     it('logs the resolved allowlist value and source', async function () {
         await withServer(
-            'https://sub-store.vercel.app,http://127.0.0.1:8888',
+            'https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888',
             async ({ logs }) => {
                 expect(logs).to.include(
-                    '[CORS] allowed origins: https://sub-store.vercel.app,http://127.0.0.1:8888 (env:SUB_STORE_CORS_ALLOWED_ORIGINS)',
+                    '[CORS] allowed origins: https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888 (env:SUB_STORE_CORS_ALLOWED_ORIGINS)',
                 );
             },
         );

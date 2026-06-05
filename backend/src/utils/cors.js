@@ -1,9 +1,8 @@
 /* eslint-disable no-undef */
 
-export const NODE_CORS_ALLOWED_ORIGINS_ENV =
-    'SUB_STORE_CORS_ALLOWED_ORIGINS';
+export const NODE_CORS_ALLOWED_ORIGINS_ENV = 'SUB_STORE_CORS_ALLOWED_ORIGINS';
 export const NODE_CORS_DEFAULT = '*';
-export const NON_NODE_CORS_DEFAULT = 'https://sub-store.vercel.app';
+export const NON_NODE_CORS_DEFAULT = 'https://sub-store-frontend.666986.xyz';
 export const CORS_ARGUMENT_KEY = 'cors';
 
 const WILDCARD_ORIGIN = '*';
@@ -27,11 +26,7 @@ export function parseArgument(rawArgument) {
     );
 }
 
-export function resolveCorsPolicy({
-    isNode,
-    envValue,
-    argument,
-} = {}) {
+export function resolveCorsPolicy({ isNode, envValue, argument } = {}) {
     const defaultValue = isNode ? NODE_CORS_DEFAULT : NON_NODE_CORS_DEFAULT;
     const configuredValue = isNode
         ? envValue
