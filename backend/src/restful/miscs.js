@@ -93,7 +93,7 @@ export default function register($app) {
         // Redirect sub.store to vercel webpage
         $app.get('/', async (req, res) => {
             // 302 redirect
-            res.set('location', 'https://sub-store.vercel.app/')
+            res.set('location', 'https://sub-store-frontend.666986.xyz/')
                 .status(302)
                 .end();
         });
@@ -122,7 +122,7 @@ function getEnv(req, res) {
             {
                 status: 'success',
                 data: {
-                    guide: '⚠️⚠️⚠️ 您当前看到的是后端的响应. 若想配合前端使用, 可访问官方前端 https://sub-store.vercel.app 后自行配置后端地址, 或一键配置后端 https://sub-store.vercel.app?api=https://a.com/xxx (假设 https://a.com 是你后端的域名, /xxx 是自定义路径). 需注意 HTTPS 前端无法请求非本地的 HTTP 后端(部分浏览器上也无法访问本地 HTTP 后端). 请配置反代或在局域网自建 HTTP 前端. 如果还有问题, 可查看此排查说明: https://t.me/zhetengsha/1068',
+                    guide: '⚠️⚠️⚠️ 您当前看到的是后端的响应. 若想配合前端使用, 可访问官方前端 https://sub-store-frontend.666986.xyz 后自行配置后端地址, 或一键配置后端 https://sub-store-frontend.666986.xyz?api=https://a.com/xxx (假设 https://a.com 是你后端的域名, /xxx 是自定义路径). 需注意 HTTPS 前端无法请求非本地的 HTTP 后端(部分浏览器上也无法访问本地 HTTP 后端). 请配置反代或在局域网自建 HTTP 前端. 如果还有问题, 可查看此排查说明: https://t.me/zhetengsha/1068',
                     ...env,
                 },
             },

@@ -28,16 +28,16 @@ describe('CORS allowlist policy', function () {
         const policy = resolveCorsPolicy({
             isNode: true,
             envValue:
-                'https://sub-store.vercel.app, http://127.0.0.1:8888',
+                'https://sub-store-frontend.666986.xyz, http://127.0.0.1:8888',
         });
 
         expect(policy).to.deep.include({
             wildcard: false,
             source: `env:${NODE_CORS_ALLOWED_ORIGINS_ENV}`,
-            value: 'https://sub-store.vercel.app,http://127.0.0.1:8888',
+            value: 'https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888',
         });
         expect(
-            isOriginAllowed(policy, 'https://sub-store.vercel.app'),
+            isOriginAllowed(policy, 'https://sub-store-frontend.666986.xyz'),
         ).to.equal(true);
         expect(isOriginAllowed(policy, 'http://127.0.0.1:8888')).to.equal(
             true,
@@ -65,13 +65,13 @@ describe('CORS allowlist policy', function () {
         const policy = resolveCorsPolicy({
             isNode: false,
             argument:
-                'sync_success_notify=true&cors=https%3A%2F%2Fsub-store.vercel.app%2Chttp%3A%2F%2F127.0.0.1%3A8888',
+                'sync_success_notify=true&cors=https%3A%2F%2Fsub-store-frontend.666986.xyz%2Chttp%3A%2F%2F127.0.0.1%3A8888',
         });
 
         expect(policy).to.deep.include({
             wildcard: false,
             source: 'argument:cors',
-            value: 'https://sub-store.vercel.app,http://127.0.0.1:8888',
+            value: 'https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888',
         });
     });
 
@@ -79,13 +79,13 @@ describe('CORS allowlist policy', function () {
         const policy = resolveCorsPolicy({
             isNode: false,
             argument:
-                '"cors=https://sub-store.vercel.app,http://127.0.0.1:8888"',
+                '"cors=https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888"',
         });
 
         expect(policy).to.deep.include({
             wildcard: false,
             source: 'argument:cors',
-            value: 'https://sub-store.vercel.app,http://127.0.0.1:8888',
+            value: 'https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888',
         });
     });
 
@@ -107,17 +107,17 @@ describe('CORS allowlist policy', function () {
         const policy = resolveCorsPolicy({
             isNode: false,
             argument: {
-                cors: 'https://sub-store.vercel.app,http://127.0.0.1:8888',
+                cors: 'https://sub-store-frontend.666986.xyz,http://127.0.0.1:8888',
             },
         });
 
-        expect(isOriginAllowed(policy, 'https://sub-store.vercel.app')).to.equal(
+        expect(isOriginAllowed(policy, 'https://sub-store-frontend.666986.xyz')).to.equal(
             true,
         );
         expect(
-            isOriginAllowed(policy, 'https://evil.example.sub-store.vercel.app'),
+            isOriginAllowed(policy, 'https://evil.example.sub-store-frontend.666986.xyz'),
         ).to.equal(false);
-        expect(isOriginAllowed(policy, 'http://sub-store.vercel.app')).to.equal(
+        expect(isOriginAllowed(policy, 'http://sub-store-frontend.666986.xyz')).to.equal(
             false,
         );
         expect(isOriginAllowed(policy, 'http://127.0.0.1')).to.equal(false);
@@ -152,14 +152,14 @@ describe('CORS allowlist policy', function () {
         const policy = resolveCorsPolicy({
             isNode: false,
             argument: {
-                cors: 'https://sub-store.vercel.app',
+                cors: 'https://sub-store-frontend.666986.xyz',
             },
         });
 
         expect(
-            getCorsHeaders(policy, 'https://sub-store.vercel.app'),
+            getCorsHeaders(policy, 'https://sub-store-frontend.666986.xyz'),
         ).to.deep.equal({
-            'Access-Control-Allow-Origin': 'https://sub-store.vercel.app',
+            'Access-Control-Allow-Origin': 'https://sub-store-frontend.666986.xyz',
             Vary: 'Origin',
         });
         expect(getCorsHeaders(policy, 'https://evil.example')).to.deep.equal(
